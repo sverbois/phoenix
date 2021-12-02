@@ -1,0 +1,3 @@
+-r requirements-production.txt
+black
+isort

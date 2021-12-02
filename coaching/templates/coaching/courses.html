@@ -1,0 +1,32 @@
+{% extends "coaching/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Cours</h1>
+<div class="row">
+{% for course in page_obj %}
+<div class="col-sm-4">
+    <div class="card">
+        {% if course.image %}
+            <img src="{{course.image.thumbnail.640x640 }}" class="card-img-top" alt="Image du cours" />
+        {% else%}
+            <img src="{% static 'coaching/empty.png' %}" class="card-img-top" alt="Image vide" />
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ course.title }}</h5>
+            <p class="card-text">{{ course.description }}</p>
+            <a href="{% url 'coaching:course' course.id %}" class="btn btn-primary">En savoir plus</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+<ul class="pagination pagination-lg">
+    {% for num in paginator.page_range %}
+        <li class="page-item{% if num == page_obj.number %} active{% endif %}">
+            <a class="page-link" href="?page={{ num }}">{{num}}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

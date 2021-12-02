@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'phoenix/bootstrap.min.css'%}" rel="stylesheet">
+    <title>{% block title %}BLOCK TITLE{% endblock %}</title>
+</head>
+
+<body>
+    <header class="fs-1">
+        <div class="container">Phoenix site</div>
+    </header>
+    <div class="container">
+        {% block content %}BLOCK CONTENT{% endblock %}
+    </div>
+    <footer>
+        {% block footer %}{% endblock %}
+        <div class="container">Site réalisé par Sébastien</div>
+    </footer>
+
+    <script src="{% static 'phoenix/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

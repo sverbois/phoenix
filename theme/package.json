@@ -1,0 +1,26 @@
+{
+    "name": "poenix-theme",
+    "description": "Boostrap Theme for Phoenix site",
+    "devDependencies": {
+        "autoprefixer": "^10.3.7",
+        "clean-css-cli": "^5.4.0",
+        "nodemon": "^2.0.14",
+        "npm-run-all": "^4.1.5",
+        "postcss": "^8.3.11",
+        "postcss-cli": "^9.0.1",
+        "sass": "^1.43.3",
+        "stylelint-config-twbs-bootstrap": "^2.2.4"
+    },
+    "scripts": {
+        "watch": "nodemon --watch scss/ --ext scss --exec \"npm run css-main\"",
+        "build": "npm-run-all css-compile-main css-prefix-main css-minify-main",
+        "css-main": "npm-run-all css-compile-main css-prefix-main css-minify-main",
+        "css-compile-main": "sass --load-path=node_modules --style expanded --source-map --embed-sources --no-error-css scss/pink.scss:../phoenix/static/phoenix/bootstrap.css",
+        "css-prefix-main": "postcss --config postcss.config.js --replace \"../phoenix/static/phoenix/*.css\" \"!../phoenix/static/phoenix/*.min.css\"",
+        "css-minify-main": "cleancss -O1 --format breakWith=lf --with-rebase --source-map --source-map-inline-sources --output ../phoenix/static/phoenix/bootstrap.min.css ../phoenix/static/phoenix/bootstrap.css",
+        "css-lint": "stylelint \"scss/**/*.scss\" --cache --cache-location .cache/.stylelintcache"
+    },
+    "dependencies": {
+        "bootstrap": "^5.1.3"
+    }
+}

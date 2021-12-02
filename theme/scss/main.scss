@@ -1,0 +1,32 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../node_modules/bootstrap/scss/functions";
+
+
+// 2. Include any default variable overrides here
+$primary: pink;
+$danger: OrangeRed;
+// $body-bg : Silver;
+$headings-color : SeaGreen;
+$link-decoration : none;
+$enable-rounded: false;
+$border-radius: .75rem;
+$btn-border-radius: 0rem;
+
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+// 3.1 Include new theme colors
+$custom-color-seba: Fuchsia;
+$custom-theme-colors: (
+     "seba": $custom-color-seba
+);
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);
+
+
+// 4. Include any optional Bootstrap components as you like
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+
+// 5. Add additional custom code here

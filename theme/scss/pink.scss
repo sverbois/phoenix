@@ -1,0 +1,44 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+$pink: #EE4793;
+$light-pink: #F3A4CB;
+$lighter-pink: #f7d4e5;
+$lightest-pink: #fff2f8;
+$medium-grey: #555;
+
+$primary: $pink;
+$secondary: $light-pink;
+
+$enable-rounded:              false;
+$border-radius:               1rem;
+
+$body-bg: $lightest-pink;
+$breadcrumb-bg: $lighter-pink;
+
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Vibur&display=swap');
+$font-family-sans-serif: Itim, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$headings-font-family: Vibur;
+
+// Font colors
+$headings-color: $primary;
+$body-color: $medium-grey;
+
+// Font sizes
+$font-size-base:              1rem;
+$h1-font-size:                $font-size-base * 3;
+$h2-font-size:                $font-size-base * 2.5;
+
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+
+
+// 4. Include any optional Bootstrap components as you like
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+
+// 5. Add additional custom code here
