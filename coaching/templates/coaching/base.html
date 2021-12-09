@@ -10,13 +10,26 @@
 </head>
 
 <body>
-    <header class="fs-1">
-        <div class="container">Phoenix site</div>
+    <header class="bg-primary p-5">
+        <div class="container">
+            {% if user.is_anonymous %}
+            <div class="float-end"><a href="{% url "login" %}" class="text-body">Login</a></div>
+            {% else %}
+            <div class="float-end">
+                {{user.get_full_name}}
+                |
+                <a href="{% url "coaching:dashboard" %}" class="text-body">Dashboard</a>
+                |
+                <a href="{% url "logout" %}" class="text-body">Logout</a>
+            </div>
+            {% endif %}
+            <div class="fs-1">Phoenix site</div>
+        </div>
     </header>
-    <div class="container">
+    <div class="container p-5">
         {% block content %}BLOCK CONTENT{% endblock %}
     </div>
-    <footer>
+    <footer class="bg-primary text-center p-3">
         {% block footer %}{% endblock %}
         <div class="container">Site réalisé par Sébastien</div>
     </footer>

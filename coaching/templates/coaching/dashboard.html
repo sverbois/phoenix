@@ -1,0 +1,25 @@
+{% extends "coaching/base.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">Mes informations</div>
+    <div class="card-body">
+      <h5 class="card-title">{{user.get_full_name}}</h5>
+      <p class="card-text">
+          <strong class="text-primary">Courriel</strong> : {{user.email}}
+        </p>
+        <p class="card-text">
+           {{user.profile.curriculum}}
+        </p>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">Mes prochaines séances</div>
+    <div class="card-body">
+      <p class="card-text">TODO</p>
+    </div>
+</div>
+{% endblock %}

@@ -18,8 +18,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    path("", include("coaching.urls")),
+    path("", RedirectView.as_view(url="/coaching/"), name="redirect-to-coaching-home"),
+    path("coaching/", include("coaching.urls")),
     path("admin/", admin.site.urls),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path(
+        "accounts/profile/",
+        RedirectView.as_view(url="/coaching/dashboard"),
+        name="redirect-to-coaching-dashboard",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
