@@ -1,3 +1,6 @@
+from datetime import date
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -32,12 +35,17 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+    def next_sessions(self):
+        now = datetime.now()
+        return self.session_set.filter(start__gt=now).order_by("start")
+
 
 class Session(models.Model):
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
     )
+    inscriptions = models.ManyToManyField(User, through="Inscription")
     start = models.DateTimeField()
     end = models.DateTimeField()
 
@@ -45,9 +53,22 @@ class Session(models.Model):
         return f"{self.course.title} / {self.start}"
 
 
-# TODO
-# class Card(models.Model):
-#    creation_date = models.DateTimeField(auto_now_add=True)
+# Documentation : https://docs.djangoproject.com/en/3.2/topics/db/models/#extra-fields-on-many-to-many-relationships
+class Inscription(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            # https://docs.djangoproject.com/en/3.2/ref/models/constraints/#uniqueconstraint
+            models.UniqueConstraint(
+                fields=["session", "user"], name="inscription_unique_user_session"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.user} / {self.session}"
 
 
 class Profile(models.Model):
