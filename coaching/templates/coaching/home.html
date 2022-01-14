@@ -4,5 +4,23 @@
 {% block title %}Accueil Phoenix{% endblock %}
 
 {% block content %}
-<p>Bienvenue sur le site Phoenix</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Accueil</h5>
+                <p class="card-text">Bienvenue sur le site Phoenix !!!</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Cours</h5>
+                <p class="card-text">De nombreux cours sont donnés par des experts.</p>
+                <a href="{% url 'coaching:courses' %}" class="btn btn-primary">Liste des cours</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
