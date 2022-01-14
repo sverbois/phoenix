@@ -1,1 +1,26 @@
-<h1>{{ object.title }}</h1>
+{% extends "coaching/base.html" %}
+{% load static %}
+{% load coaching_tags %}
+
+{% block title %}Cours{% endblock %}
+
+{% block content %}
+<h1>{{ object.title }} (max {{ object.max_attendees }} personnes)</h1>
+<p>
+    {{ object.description }}
+</p>
+<h2>Prochaines sessions</h2>
+{% for session in object.next_sessions %}
+<h3>
+    <!-- See https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#date -->
+    {{session.course.title}} / {{session.start | date:"l d F Y à H\hi"}}
+    {% if not user.is_anonymous and user|in_group:"Students" %}
+    <form class="d-inline-block" method="POST" action="{% url 'coaching:inscription' %}">
+        {% csrf_token %}
+        <input type="hidden" name="session_id" value="{{ session.id }}">
+        <button type="submit" name="add" class="btn btn-primary text-white">S'inscrire</button>
+    </form>
+    {% endif %}
+</h3>
+{% endfor %}
+{% endblock %}

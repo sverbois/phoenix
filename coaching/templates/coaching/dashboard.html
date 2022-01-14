@@ -19,7 +19,9 @@
 <div class="card">
     <div class="card-header">Mes prochaines séances</div>
     <div class="card-body">
-      <p class="card-text">TODO</p>
+      {% for session in next_sessions %}
+      <p class="card-text">{{session}}</p>
+      {% endfor %}
     </div>
 </div>
 {% endblock %}
