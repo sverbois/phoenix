@@ -28,6 +28,17 @@
             <div class="fs-1"><a href="{% url "coaching:home" %}" class="text-body text-decoration-none">Phoenix site</a></div>
         </div>
     </header>
+    {% if messages %}
+    <div class="container px-5 pt-5">
+        {% for message in messages %}
+         <div class="alert alert-{{message.level_tag}}">
+             <span class="text-uppercase">{{message.level_tag}}</span>
+             :
+             {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <div class="container p-5">
         {% block content %}BLOCK CONTENT{% endblock %}
     </div>

@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -63,6 +64,14 @@ def inscription_view(request):
         if "add" in request.POST and not old_inscription:
             new_inscription = Inscription(user_id=user_id, session_id=session_id)
             new_inscription.save()
+            messages.success(
+                request, f"Votre inscription {new_inscription} a bien été enregistrée."
+            )
+        if "add" in request.POST and old_inscription:
+            messages.warning(request, f"Vous êtes déjà inscrit à {old_inscription} .")
         if "delete" in request.POST and old_inscription:
             old_inscription.delete()
+            messages.info(
+                request, f"Votre inscription {old_inscription} a bien été effacée."
+            )
     return HttpResponseRedirect(reverse("coaching:dashboard"))
