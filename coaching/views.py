@@ -55,14 +55,14 @@ def inscription_view(request):
     user_id = request.user.id
     if request.method == "POST":
         session_id = request.POST["session_id"]
-        has_inscription = (
+        old_inscription = (
             Inscription.objects.filter(user_id=user_id)
             .filter(session_id=session_id)
-            .count()
+            .first()
         )
-        if "add" in request.POST and not has_inscription:
+        if "add" in request.POST and not old_inscription:
             new_inscription = Inscription(user_id=user_id, session_id=session_id)
             new_inscription.save()
-        if "delete" in request.POST and has_inscription:
-            pass
+        if "delete" in request.POST and old_inscription:
+            old_inscription.delete()
     return HttpResponseRedirect(reverse("coaching:dashboard"))

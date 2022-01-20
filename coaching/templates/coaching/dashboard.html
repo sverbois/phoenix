@@ -20,7 +20,14 @@
     <div class="card-header">Mes prochaines séances</div>
     <div class="card-body">
       {% for session in next_sessions %}
-      <p class="card-text">{{session}}</p>
+      <div class="card-text pb-3">
+        {{session}}
+        <form class="d-inline-block" method="POST" action="{% url 'coaching:inscription' %}">
+          {% csrf_token %}
+          <input type="hidden" name="session_id" value="{{ session.id }}">
+          <button type="submit" name="delete" class="btn btn-primary text-white">Se désinscrire</button>
+        </form>
+      </div>
       {% endfor %}
     </div>
 </div>
