@@ -6,9 +6,11 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views import generic
+from django.views.generic.edit import DeleteView
 
 from .models import Course
 from .models import Inscription
@@ -23,10 +25,13 @@ class DashboardView(View):
     @method_decorator(login_required)
     def get(self, request):
         self.request = request
-        context = {"next_sessions": self.get_next_sessions()}
+        context = {
+            "next_inscriptions": self.get_next_inscriptions(),
+            "next_sessions": self.get_next_sessions(),
+        }
         return render(request, "coaching/dashboard.html", context)
 
-    def get_next_sessions(self):
+    def get_next_inscriptions(self):
         now = datetime.now()
         current_user = self.request.user
         inscriptions = (
@@ -34,6 +39,10 @@ class DashboardView(View):
             .filter(session__start__gt=now)
             .order_by("session__start")
         )
+        return inscriptions
+
+    def get_next_sessions(self):
+        inscriptions = self.get_next_inscriptions()
         return [ins.session for ins in inscriptions]
 
 
@@ -75,3 +84,9 @@ def inscription_view(request):
                 request, f"Votre inscription {old_inscription} a bien été effacée."
             )
     return HttpResponseRedirect(reverse("coaching:dashboard"))
+
+
+class DeleteInscription(DeleteView):
+    model = Inscription
+    template_name = "coaching/delete-inscription.html"
+    success_url = reverse_lazy("coaching:dashboard")

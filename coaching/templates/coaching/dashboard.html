@@ -31,4 +31,17 @@
       {% endfor %}
     </div>
 </div>
+<div class="card">
+  <div class="card-header">Mes prochaines inscriptions</div>
+  <div class="card-body">
+    {% for inscription in next_inscriptions %}
+    <div class="card-text pb-3">
+      {{inscription}}
+      <a href="{% url 'coaching:delete-inscription' inscription.id %}" class="btn btn-primary text-white">
+        Se désinscrire (avec sécurité)
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

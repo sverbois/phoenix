@@ -9,4 +9,9 @@ urlpatterns = [
     path("courses", views.CoursesView.as_view(), name="courses"),
     path("courses/<int:pk>/", views.CourseView.as_view(), name="course"),
     path("inscription", views.inscription_view, name="inscription"),
+    path(
+        "delete-inscription/<int:pk>/",
+        views.DeleteInscription.as_view(),
+        name="delete-inscription",
+    ),
 ]
