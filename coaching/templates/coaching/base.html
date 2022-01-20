@@ -18,6 +18,8 @@
             <div class="float-end">
                 {{user.get_full_name}}
                 |
+                <a href="{% url 'coaching:courses' %}" class="text-body">Cours</a>
+                |
                 <a href="{% url "coaching:dashboard" %}" class="text-body">Dashboard</a>
                 |
                 <a href="{% url "logout" %}" class="text-body">Logout</a>
