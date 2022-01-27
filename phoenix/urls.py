@@ -20,8 +20,11 @@ from django.urls import include
 from django.urls import path
 from django.views.generic.base import RedirectView
 
+from .views import contact_view
+
 urlpatterns = [
     path("", RedirectView.as_view(url="/coaching/"), name="redirect-to-coaching-home"),
+    path("contact/", contact_view, name="contact"),
     path("coaching/", include("coaching.urls")),
     path("admin/", admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),

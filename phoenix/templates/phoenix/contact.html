@@ -1,0 +1,16 @@
+{% extends "phoenix/base.html" %}
+{% load static %}
+{% load bootstrap5 %}
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<form method="POST" action="">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        Envoyer
+    </button>
+  {% endbuttons %}
+</form>
+{% endblock %}
